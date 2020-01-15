@@ -1,32 +1,79 @@
-<?php 
-    if(isset($_POST['firstname']) && isset($_POST['email']) &&isset($_POST['firstdate']) && isset($_POST['seconddate'])) {
-        $name = $_POST['name'];
-        $email = $_POST['email'];
-        $to = 'milesfarrell1997@gmail.com';
-        $subject = "Hopara test";
-        $body = '<html>
-                    <body>
-                        <h2>We have a new date wishing to be booked</h2>
-                        <p>Name<br>'.$firstname.'</p>
-                        <p>Email<br>'.$email.'</p>
-                        <p>First Date<br>'.$firstdate.'</p>
-                        <p>Second Date<br>'.$seconddate.'</p>
-                    </body>4
-                </html>';
-            
-    //headers
-    $headers = "From: ".$name." <".$email.">\r\n";
-    $headers .= "Reply-To: ".$email."\r\n";
-    $headers .= "MIME-Version: 1.0\r\n";
-    $headers .= "Content-type: text/html; charset-utf-8";
-    //send
-    $send = mail($to, $subject, $body, $headers);
-    if($send){
-        echo '<br>';
-        echo 'Thanks for booking with hopara! we will ring you shortly!';
-    }else{
-        echo 'error';
+<?php
+if(isset($_POST['email'])) {
+ 
+    // EDIT THE 2 LINES BELOW AS REQUIRED
+    $email_to = "milesfarrell1997@gmail.com";
+    $email_subject = "Test";
+ 
+    function died($error) {
+        // your error code can go here
+        echo "We are very sorry, but there were error(s) found with the form you submitted. ";
+        echo "These errors appear below.<br /><br />";
+        echo $error."<br /><br />";
+        echo "Please go back and fix these errors.<br /><br />";
+        die();
     }
+ 
+ 
+    // validation expected data exists
+    if(!isset($_POST['firstname']) ||
+        !isset($_POST['email']) ||
+        !isset($_POST['firstdate']) ||
+        !isset($_POST['seconddate'])) {
+        died('We are sorry, but there appears to be a problem with the form you submitted.');       
     }
-
+ 
+     
+ 
+    $firstname = $_POST['firstname']; // required
+    $email_from = $_POST['email']; // required
+    $firstdate = $_POST['firstdate']; // not required
+    $seconddate = $_POST['seconddate']; // required
+ 
+    $error_message = "";
+    $email_exp = '/^[A-Za-z0-9._%-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/';
+ 
+  if(!preg_match($email_exp,$email_from)) {
+    $error_message .= 'The Email Address you entered does not appear to be valid.<br />';
+  }
+ 
+    $string_exp = "/^[A-Za-z .'-]+$/";
+ 
+  if(!preg_match($string_exp,$firstname)) {
+    $error_message .= 'The First Name you entered does not appear to be valid.<br />';
+  }
+ 
+  if(strlen($error_message) > 0) {
+    died($error_message);
+  }
+ 
+    $email_message = "Form details below.\n\n";
+ 
+     
+    function clean_string($string) {
+      $bad = array("content-type","bcc:","to:","cc:","href");
+      return str_replace($bad,"",$string);
+    }
+ 
+     
+ 
+    $email_message .= "First Name: ".clean_string($firstname)."\n";
+    $email_message .= "Email: ".clean_string($email_from)."\n";
+    $email_message .= "First Date: ".clean_string(firstdate)."\n";
+    $email_message .= "Second Date: ".clean_string($seconddate)."\n";
+ 
+// create email headers
+$headers = 'From: '.$email_from."\r\n".
+'Reply-To: '.$email_from."\r\n" .
+'X-Mailer: PHP/' . phpversion();
+@mail($email_to, $email_subject, $email_message, $headers);  
+?>
+ 
+<!-- include your own success html here -->
+ 
+Thank you for contacting us. We will be in touch with you very soon.
+ 
+<?php
+ 
+}
 ?>
