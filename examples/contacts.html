@@ -68,7 +68,7 @@
         <div class="landing-header" style="background-image: url('../assets/test3.png');">
             <div class="container">
                 <div class="motto">
-                    <h1 class="title-uppercase">Contact and Rental enquiries</h1>
+                    <h1 class="title-uppercase">Contact and Rental Inquiries</h1>
                     <h3></h3>
                     <br/>
                     <a class="btn btn-danger btn-fill">Book Now</a>
@@ -81,7 +81,7 @@
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
                             <h2>Contact and Rentals</h2>
-                            <h5>For all booking enquiries please contact us on <a href="mailto:Hōparacampers@gmail.com">Hōparacampers@gmail.com</a>
+                            <h5>For all booking enquiries please contact us on <a href="mailto:hoparacampers@gmail.com">hoparacampers@gmail.com</a>
                                 <br>or call:<br>
                                 Mat: <a href="tel:027 213 8584">027 213 8584</a><br>
                                 Perry: <a href="tel:027 556 0008">027 556 0008</a><br><br>
@@ -104,26 +104,28 @@
                             <h4>Booking</h4>
                             <p>Minimum booking time is two days</p>
                             <br>
+                            
                             <div class="form-group">
                                 <h5>Keen to book? Fill in the information below:</h5>
+                                
+                                <form action ="site.php" method="post">
                                         <label>Name</label>
-                                        <input class="form-control " placeholder="Name">
-                                    
-                                    <div class="">
+                                        <input type="text" class="form-control" name="firstname" placeholder="Firstname">
+
                                         <label>Email</label>
-                                        <input class="form-control" placeholder="Email">
-                                    </div>
-                                <div class="">
+                                        <input type="email" class="form-control "name ="email" placeholder="Email Address">
+                               <div class="">
                                     <label>Start Date</label>
-                                    <input class="datepicker form-control" type="text" placeholder="1/1/2020"/>
+                                    <input type ="date" class="form-control" name="firstdate" placeholder="1/1/2020"/>
 
                                 </div>
                                 <div class="">
                                     <label>Finish Date</label>
-                                    <input class="datepicker form-control" type="text" placeholder="1/11/2020"/>
+                                    <input type ="date" class="form-control" name="seconddate" placeholder="1/11/2020"/>
                                     <br>
-                                    <a class="btn btn-danger btn-fill">Book Now</a>
+                                    <input type ="submit" class="btn btn-danger btn-fill">
                                 </div>
+                                </form>
                             </div>
                             </div>
                         </div>
@@ -159,7 +161,7 @@
                                 <div class="col-md-4"><p>> 25 & on a non NZ license or NZ license held for less than 1 year </p></div><div class = "col-md-4"> <p>$2000</p></div>
                             </div>
                             </div>
-                    </div>
+                        </div>
                 </div>
             </div>
             <div class="section landing-section">
